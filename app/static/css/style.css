@@ -1,0 +1,46 @@
+html {
+	box-sizing: border-box;
+}
+
+html, body {
+	height: 100%;
+}
+
+body {
+	font-family: 'Brandon_reg';
+	font-size: 18px;
+	color: #424242;
+	position: relative;
+	margin: 0;
+}
+.wrapper {
+	width:100%;
+	height:100%;
+}
+.container {
+	margin: 0px auto;
+}
+.photo-container {
+	position: relative; 
+}
+.hide {
+	display: none;
+}
+.photo-container .clicked-picture{
+	height:auto;
+	overflow:auto;
+}
+.photo-container .score-overlay {
+	
+}
+
+.tag-container{
+	margin-top: 20px;
+	padding: 20px;
+}
+
+.btn-group {
+	margin-top: 20px;
+	padding: 20px;
+}
+
