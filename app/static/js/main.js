@@ -21,17 +21,6 @@ snapshotButton.onclick = function() {
   canvas.className = 'none';
   var context = canvas.getContext('2d');
   context.drawImage(video, 0, 0, canvas.width, canvas.height);
-  
-  var image = new Image();
-  image.setAttribute('crossOrigin', 'anonymous');
-  image.setAttribute('crossDomain', true)
-  image.onload = function () {
-	  console.log(canvas.height - image.height);
-	  context.globalAlpha = 0.5;
-	  context.drawImage(image, 0, 152, canvas.width, canvas.height);
-  };
-  image.src = "/shareme/image/footabll-score-clipart-1.jpg";
-  
 };
 
 var constraints = {
