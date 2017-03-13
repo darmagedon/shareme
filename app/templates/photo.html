@@ -1,30 +1,30 @@
 <!DOCTYPE html">
 <html>
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta property="og:type"   content="content" />
-<meta property="og:title" content="ShareMei" />
-<meta property="og:description" content="Description about the thing that is about to be shared." />
-<meta property="og:image" content="" />
-<link rel="stylesheet" href="../static/css/font-awesome.css">
-<link rel="stylesheet" href="../static/css/jquery.hashtags.css">
-<link rel="stylesheet" href="../static/css/overlay.css">
-<link rel="stylesheet" href="../static/css/main.css">
-<script type="text/javascript" src="../static/js/jquery.js"></script>
-<script type="text/javascript" src="../static/js/jquery-ui.min.js"></script>
-<script type="text/javascript" src="../static/js/facebook.js"></script>
-<script type="text/javascript" src="../static/js/photo.js"></script>
-<script type="text/javascript" src="../static/js/autosize.min.js"></script>
-<script type="text/javascript" src="../static/js/jquery.hashtags.js"></script>
-<script type="text/javascript" src="../static/js/loading-overlay.min.js"></script>
-<script type="text/javascript" src="../static/js/dropzone.js"></script>
+<link href="css/style.css" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/font-awesome.css">
+<link rel="stylesheet" href="/static/css/jquery.hashtags.css">
+<link rel="stylesheet" href="/static/css/overlay.css">
+<link rel="stylesheet" href="/static/css/main.css">
+<script type="text/javascript" src="/static/js/jquery.js"></script>
+<script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/static/js/facebook.js"></script>
+<script type="text/javascript" src="/static/js/photo.js"></script>
+<script type="text/javascript" src="/static/js/autosize.min.js"></script>
+<script type="text/javascript" src="/static/js/jquery.hashtags.js"></script>
+<script type="text/javascript" src="/static/js/loading-overlay.min.js"></script>
+<script type="text/javascript" src="/static/js/dropzone.js"></script>
 <title>ShareMei</title>
 </head>
 <body>
 	<script>
 	var accessToken;
   // This is called with the results from from FB.getLoginStatus().
-  
+
 </script>
 
 <!--
@@ -32,53 +32,49 @@
   the JavaScript SDK to present a graphical Login button that triggers
   the FB.login() function when clicked.
 -->
-
-<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-</fb:login-button>
-
-<div id="status">
-</div>
-
 	<div class="wrapper">
 		<div class="container">
+		<fb:login-button scope="public_profile,email" onlogin="checkLoginState();" style="float:right;">
+		</fb:login-button>
+		<div id="status">
+		</div>
 			<div class="photo-container">
-			<span class="clicked-picture">
-				<!-- <img alt="Image" data-image-url="http://images.performgroup.com/di/library/GOAL/2e/f1/zlatan-ibrahimovic-man-utd-2017_1brq164arq3az15v4febx1alzc.jpg?t=-1785312414" src="">
-			 -->
-			<video autoplay></video>
-    		<button id="snapshot">Take snapshot</button>
-    		<canvas class="hide"></canvas>
+				<span class="clicked-picture">
+				<div class="video-wrapper">
+					<video autoplay></video>
+					<div>
+						<button id="snapshot">Take snapshot</button>
+					</div>
+				</div>
+    		<canvas class="snapshot hide"></canvas>
 			 </span>
-			<span class="score-overlay hide">
-				<img src="" data-image-url="http://worldsoccertalk.com/wp-content/uploads/2013/04/man-city-man-united-6-1-graphic.jpg" alt="Score">
-			</span>
 			</div>
 			<div class="tag-container">
-				<label for="tags">Tags</label>
-				<textarea type="text" name="tags" class="hashtags"></textarea>
+				<!-- <label for="tags">Tags</label> -->
+				<textarea type="text" name="tags" class="hashtags" placeholder="hastags here..."></textarea>
 			</div>
 			<div class="btn-group">
 				<div class="btn">
-					<div class="fb-share-button" data-href="https://github.com/webrtc/samples" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</a></div>
+					<div class="fb-share-button" data-href="https://github.com/webrtc/samples" data-layout="button_count" data-size="large" data-mobile-iframe="true"><button class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share Photo</button></div>
 				</div>
 				<div class="btn">
 				 	<button class="btn-share-instagram">Share Somewhere</button>
 				 </div>
-			</div>		
+			</div>
 		</div>
-	</div>	
+	</div>
 	<div id="fb-root"></div>
-	<script type="text/javascript" src="../static/js/main.js"></script>
+	<script type="text/javascript" src="/static/js/main.js"></script>
 <script>
 	(function(d, s, id) {
 	  var js, fjs = d.getElementsByTagName(s)[0];
-	  if (d.getElementById(id)) 
+	  if (d.getElementById(id))
 		  return;
-	  js = d.createElement(s); 
+	  js = d.createElement(s);
 	  js.id = id;
 	  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
 	  fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));
-</script>	
+</script>
 </body>
 </html>
