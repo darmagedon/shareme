@@ -28,6 +28,9 @@ def post_page():
     post_image(access_token, version)
     return render_template('success.html')
 
+@app.route('/preview/<int:id>', methods=['GET'])
+def photo_preview_Page():
+    return render_template('ImagePreview.html')
 
 if __name__ == '__main__':
 
