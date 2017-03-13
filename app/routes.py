@@ -21,10 +21,14 @@ def index():
 @app.route('/photo')
 def post_page():
 #    access_token = 'EAACuoLleKugBAHs2ZBLdPW2ZCFQ7LdhIqIzSAxJTI97FcSahyyo0ItOs7SpK1LNsaiJsULL3hNVJ3VJuyVomNAD3ACihxOZC2476FUJNtFg9vxEJJgYbLgZAhZAzUTNWHUdau63VxYla2YZCe2z0mmpAaIeIhz6HXhL1OARwQT7GK6k1xSem5Y'
-    access_token = 'EAAKkjCzmq2QBAK6C5WmbgdxZCRkulgf8dowT5HuzrwMS0z1ZCtOiKZACsNLLOt8mEO0kgRd7JFVBALynLCZAXywgMmKVVhZBBqNLkClUC91cIUx0pVNUkcwcDp1Jamn0XkA1XQV5S9tNM4P8pFcR9qersaxS0DiVTZAdyk0dohDFZAWkEt5QLw1'	
+    access_token = 'EAAKkjCzmq2QBAK6C5WmbgdxZCRkulgf8dowT5HuzrwMS0z1ZCtOiKZACsNLLOt8mEO0kgRd7JFVBALynLCZAXywgMmKVVhZBBqNLkClUC91cIUx0pVNUkcwcDp1Jamn0XkA1XQV5S9tNM4P8pFcR9qersaxS0DiVTZAdyk0dohDFZAWkEt5QLw1'
     post_image(access_token, version)
     return render_template('success.html')
 
+
+@app.route('/preview')
+def photo_preview_Page():
+    return render_template('ImagePreview.html')
 
 if __name__ == '__main__':
 
