@@ -12,19 +12,21 @@ def get_image(image_url):
 
 def post_image(access_token, version):
     graph = facebook.GraphAPI(access_token=access_token, version=version)
-    graph.put_photo(image=open('/home/lftechnology/domains/shareme.lftechnology.com/shareme/app/static/image/football-score-clipart-1.jpg', 'rb'), message='Look at this cool photo!')
+    graph.put_photo(image=open('/home/sparsha/100.jpg', 'rb'), message='Look at this cool photo!')
 
 @app.route('/')
 def index():
-    return render_template('photo.html')
+	return render_template('photo.html')
 
-@app.route('/photo')
+@app.route('/photo', methods=['GET', 'POST'])
 def post_page():
-#    access_token = 'EAACuoLleKugBAHs2ZBLdPW2ZCFQ7LdhIqIzSAxJTI97FcSahyyo0ItOs7SpK1LNsaiJsULL3hNVJ3VJuyVomNAD3ACihxOZC2476FUJNtFg9vxEJJgYbLgZAhZAzUTNWHUdau63VxYla2YZCe2z0mmpAaIeIhz6HXhL1OARwQT7GK6k1xSem5Y'
-    access_token = 'EAAKkjCzmq2QBAK6C5WmbgdxZCRkulgf8dowT5HuzrwMS0z1ZCtOiKZACsNLLOt8mEO0kgRd7JFVBALynLCZAXywgMmKVVhZBBqNLkClUC91cIUx0pVNUkcwcDp1Jamn0XkA1XQV5S9tNM4P8pFcR9qersaxS0DiVTZAdyk0dohDFZAWkEt5QLw1'
+    attributes= request.form
+    #access_token = 'EAACuoLleKugBAHs2ZBLdPW2ZCFQ7LdhIqIzSAxJTI97FcSahyyo0ItOs7SpK1LNsaiJsULL3hNVJ3VJuyVomNAD3ACihxOZC2476FUJNtFg9vxEJJgYbLgZAhZAzUTNWHUdau63VxYla2YZCe2z0mmpAaIeIhz6HXhL1OARwQT7GK6k1xSem5Y'
+    access_token = attributes['accessToken']
+    image = attributes['image']
+    tags = attributes['tags']
     post_image(access_token, version)
     return render_template('success.html')
-
 
 @app.route('/preview/<int:id>', methods=['GET'])
 def photo_preview_Page(id):
