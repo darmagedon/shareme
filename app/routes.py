@@ -14,6 +14,10 @@ def post_image(access_token, version):
     graph = facebook.GraphAPI(access_token=access_token, version=version)
     graph.put_photo(image=open('/home/sparsha/100.jpg', 'rb'), message='Look at this cool photo!')
 
+@app.route('/')
+def index():
+	return render_template('photo.html')
+
 @app.route('/photo', methods=['GET', 'POST'])
 def post_page():
     attributes= request.form
