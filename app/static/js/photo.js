@@ -1,15 +1,15 @@
 var sharemei = sharemei || {};
 sharemei.photoFunctions = sharemei.photoFunctions || {};
+var accessToken;
 (function(photoFunction) {
-	var thumborUrl = "http://localhost:8888/unsafe/fit-in/800x0/";
-	var thumborWaterMarkUrl = "http://localhost:8888/unsafe/fit-in/0x100/";
 	var baseUrl = location.protocol + "//" + location.host + "/";
 	var video = document.getElementById('video');
-	var accessToken;
 	
 	function statusChangeCallback(response) {
 	    console.log('statusChangeCallback');
 	    accessToken = response.authResponse.accessToken;
+	    $("#access-token").val(response.authResponse.accessToken);
+	    console.log(accessToken);	
 	    // The response object is returned with a status field that lets the
 	    // app know the current login status of the person.
 	    // Full docs on the response object can be found in the documentation
@@ -86,30 +86,20 @@ sharemei.photoFunctions = sharemei.photoFunctions || {};
 	
 	$.extend(photoFunction, {
 		init : function() {
-			photoFunction.attachWaterMark();
 			photoFunction.addEventHandlers();
 			$("textarea").hashtags();
-		},
-		attachWaterMark : function() {
-			var imageUrl = $('.clicked-picture img').data('image-url');
-			var watermarkImage = $('.score-overlay img').data('image-url');
-			var processedImageUrl = thumborUrl + "filters:watermark("
-					+ thumborWaterMarkUrl + watermarkImage + ",320,-10,20)/"
-					+ imageUrl;
-			$('.clicked-picture img').attr("src", processedImageUrl);
-			$('meta[property="og:image"]').attr('content', processedImageUrl);
 		},
 		addEventHandlers : function() {
 			$(document).on('click', '.btn-share-instagram', function(e) {
 				e.preventDefault();
 				var image = photoFunction.getImageThroughCanvas();
 				var tags = $('textarea[name="tags"]').val();
-				console.log(accessToken);
+				console.log($("#access-token").val());
 				console.log();
 				var data = {
 					tags: tags,
 					image: image.src,
-					accessToken: accessToken
+					accessToken: $("#access-token").val()
 				};
 				$(".wrapper").loadingOverlay();
 				$.ajax({
