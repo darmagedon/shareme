@@ -170,7 +170,7 @@ sharemei.photoFunctions = sharemei.photoFunctions || {};
 						console.log("logged out");
 						FB.login(function(response) {
 							$("#access-token").val(response.authResponse.accessToken);
-							if (response.authResponse.grantedScopes.contains('publish_actions')) {
+							if (response.authResponse.grantedScopes.includes('publish_actions')) {
 								photoFunction.publishToFacebook();
 							}
 						}, {
