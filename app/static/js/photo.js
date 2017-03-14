@@ -177,7 +177,7 @@ sharemei.photoFunctions = sharemei.photoFunctions || {};
 				};
 				$(".wrapper").loadingOverlay();
 				$.ajax({
-					url : baseUrl + "photo",
+					url : baseUrl + "photo/",
 					type : "POST",
 					data : data
 				}).done(function(response) {
