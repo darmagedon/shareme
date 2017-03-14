@@ -78,8 +78,8 @@ sharemei.photoFunctions = sharemei.photoFunctions || {};
 	    	console.log(1111, response);
 	      console.log('Successful login for: ' + response.name);
 	      accessToken = response.accessToken;
-	      document.getElementById('status').innerHTML =
-	        'Thanks for logging in, ' + response.name + '!';
+	      // document.getElementById('status').innerHTML =
+	      //   'Thanks for logging in, ' + response.name + '!';
 	    });
 	  };
 
@@ -136,7 +136,7 @@ sharemei.photoFunctions = sharemei.photoFunctions || {};
 					image: image.src
 				};
 				$.ajax({
-					url : baseUrl + "photo",
+					url : baseUrl + "getsharablelink",
 					type : "POST",
 					data : data,
 					async: false
