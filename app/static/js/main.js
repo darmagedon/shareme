@@ -9,7 +9,6 @@
 'use strict';
 
 var snapshotButton = document.querySelector('button#snapshot');
-// var filterSelect = document.querySelector('select#filter');
 
 // Put variables in global scope to make them available to the browser console.
 var video = window.video = document.querySelector('video');
@@ -17,15 +16,18 @@ var canvas = window.canvas = document.querySelector('canvas');
 canvas.width = 480;
 canvas.height = 360;
 
+var streamConstraints = {
+  audio: false,
+  video: true
+};
+
 snapshotButton.onclick = function() {
   canvas.className = 'none';
   var context = canvas.getContext('2d');
   context.drawImage(video, 0, 0, canvas.width, canvas.height);
-};
-
-var constraints = {
-  audio: false,
-  video: true
+  $('video, .snapshot-btn').addClass('hide');
+  $('canvas, .tag-container, .btn-group').removeClass('hide');
+  sharemei.photoFunctions.stopStream();
 };
 
 function handleSuccess(stream) {
@@ -37,5 +39,7 @@ function handleError(error) {
   console.log('navigator.getUserMedia error: ', error);
 }
 
-navigator.mediaDevices.getUserMedia(constraints).
-    then(handleSuccess).catch(handleError);
+function startStream(){
+  navigator.mediaDevices.getUserMedia(streamConstraints).
+      then(handleSuccess).catch(handleError);
+}

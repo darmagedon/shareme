@@ -1,15 +1,15 @@
 var sharemei = sharemei || {};
 sharemei.photoFunctions = sharemei.photoFunctions || {};
-var accessToken;
+
 (function(photoFunction) {
 	var baseUrl = location.protocol + "//" + location.host + "/";
 	var video = document.getElementById('video');
-	
+
 	function statusChangeCallback(response) {
 	    console.log('statusChangeCallback');
 	    accessToken = response.authResponse.accessToken;
 	    $("#access-token").val(response.authResponse.accessToken);
-	    console.log(accessToken);	
+	    console.log(accessToken);
 	    // The response object is returned with a status field that lets the
 	    // app know the current login status of the person.
 	    // Full docs on the response object can be found in the documentation
@@ -36,13 +36,13 @@ var accessToken;
 	  window.fbAsyncInit = function() {
 	  FB.init({
 	    appId      : '743871909112676',
-	    cookie     : true,  // enable cookies to allow the server to access 
+	    cookie     : true,  // enable cookies to allow the server to access
 	                        // the session
 	    xfbml      : true,  // parse social plugins on this page
 	    version    : 'v2.8' // use graph api version 2.8
 	  });
 
-	  // Now that we've initialized the JavaScript SDK, we call 
+	  // Now that we've initialized the JavaScript SDK, we call
 	  // FB.getLoginStatus().  This function gets the state of the
 	  // person visiting this page and can return one of three states to
 	  // the callback you provide.  They can be:
@@ -82,24 +82,97 @@ var accessToken;
 	        'Thanks for logging in, ' + response.name + '!';
 	    });
 	  };
-	
-	
+
+	var isMobile = window.mobilecheck();
+
 	$.extend(photoFunction, {
 		init : function() {
+			photoFunction.prepareDocument();
 			photoFunction.addEventHandlers();
 			$("textarea").hashtags();
 		},
+		prepareDocument: function(){
+			if (isMobile) {
+					$('.image-capture-button').removeClass('hide');
+			} else {
+				$('.video-wrapper').removeClass('hide');
+				startStream();
+			}
+			$('video, .snapshot-btn').removeClass('hide');
+			$('canvas, .tag-container, .btn-group').addClass('hide');
+			$('textarea').val('');
+		},
 		addEventHandlers : function() {
+			$(document).on('click', '.image-capture-button', function(){
+					$('input[type="file"]').click();
+			});
+			$(document).on('change','input[type="file"]', function (){
+       		$('.image-capture-button').addClass('hide');
+					$('canvas, .tag-container, .btn-group').removeClass('hide');
+					photoFunction.getImageFromFile();
+					photoFunction.stopStream();
+     });
+		 $(document).on('click', '#capture-another', function(){
+				photoFunction.prepareDocument();
+				console.log('cliked');
+				if (!isMobile)
+					photoFunction.startStream();
+			});
+			// $(document).on('click', '#snapshot', function(){
+			// 	canvas.className = 'none';
+			//   var context = canvas.getContext('2d');
+			// 	console.log(canvas.width, canvas.height);
+			// 	console.log(video);
+			//   context.drawImage(video, 0, 0, canvas.width, canvas.height);
+			// 	$('video, .snapshot-btn').addClass('hide');
+			// 	$('canvas, .tag-container, .btn-group').removeClass('hide');
+			// 	photoFunction.stopStream();
+			// });
+			$(document).on('click', '.fb-share-link-button', function(e){
+				e.preventDefault();
+				var dataHref;
+				var image = photoFunction.getImageThroughCanvas();
+				var data = {
+					image: image.src
+				};
+				$.ajax({
+					url : baseUrl + "photo",
+					type : "POST",
+					data : data,
+					async: false
+				}).done(function(response) {
+					dataHref = response.url;
+					FB.ui({
+				    method: 'share',
+				    display: 'popup',
+						// mobile_iframe: true,
+				    href: dataHref
+				  }, function(response){
+						console.log(response);
+					});
+				}).fail(function(error) {
+					if (typeof errorCallBack === "function")
+						errorCallBack(error);
+				});
+			});
 			$(document).on('click', '.btn-share-instagram', function(e) {
 				e.preventDefault();
+				var accessToken = $("#access-token").val();
+				console.log(accessToken);
+				if (accessToken == null || accessToken === 'undefined' || accessToken == '') {
+				console.log('throw login page');
+					FB.login(function(response) {
+  					console.log(response);
+						$("#access-token").val(response.authResponse.accessToken);
+					}, {scope: 'public_profile,email'});
+					return;
+				}
 				var image = photoFunction.getImageThroughCanvas();
 				var tags = $('textarea[name="tags"]').val();
-				console.log($("#access-token").val());
-				console.log();
 				var data = {
 					tags: tags,
 					image: image.src,
-					accessToken: $("#access-token").val()
+					accessToken: accessToken
 				};
 				$(".wrapper").loadingOverlay();
 				$.ajax({
@@ -134,6 +207,32 @@ var accessToken;
 			var image = new Image();
 			image.src = canvas.toDataURL("image/png");
 			return image;
+		},
+		getImageFromFile : function(){
+			var img;
+			if ( this.files && this.files[0] ) {
+				img = new Image()
+        var FR= new FileReader();
+        FR.onload = function(e) {
+           img.onload = function(){
+						 var context = canvas.getContext('2d');
+						 context.drawImage(img, 0, 0, canvas.width, canvas.height);
+					 };
+           img.src = e.target.result;
+        };
+        FR.readAsDataURL( this.files[0] );
+    	}
+			return img;
+		},
+		stopStream : function(){
+			if(window.stream != null && window.stream != undefined )
+					window.stream.getTracks().forEach( (track) => {
+							track.stop();
+					});
+		},
+		startStream : function(){
+			console.log(streamConstraints);
+			startStream();
 		}
 	});
 
