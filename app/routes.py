@@ -36,7 +36,7 @@ def get_sharable_link():
     save_image(image_content,time_stamp,image_location)
     return link
 
-@app.route('/photo/', methods=['POST'])
+@app.route('/photo', methods=['POST'])
 def post_page():
     attributes= request.form
     access_token = attributes['accessToken']
