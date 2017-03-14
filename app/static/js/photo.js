@@ -4,6 +4,7 @@ sharemei.photoFunctions = sharemei.photoFunctions || {};
 (function(photoFunction) {
 	var baseUrl = location.protocol + "//" + location.host + "/";
 	var video = document.getElementById('video');
+	var defaultTags = "#UnlimitedBaseball #contest #WorldSeries";
 
 	function statusChangeCallback(response) {
 	    console.log('statusChangeCallback');
@@ -89,7 +90,7 @@ sharemei.photoFunctions = sharemei.photoFunctions || {};
 		init : function() {
 			photoFunction.prepareDocument();
 			photoFunction.addEventHandlers();
-			$("textarea").hashtags();
+			$("textarea").val(defaultTags);
 		},
 		prepareDocument: function(){
 			if (isMobile) {
@@ -115,6 +116,7 @@ sharemei.photoFunctions = sharemei.photoFunctions || {};
 		 $(document).on('click', '#capture-another', function(){
 				photoFunction.prepareDocument();
 				console.log('cliked');
+				$("textarea").val(defaultTags);
 				if (!isMobile)
 					photoFunction.startStream();
 			});

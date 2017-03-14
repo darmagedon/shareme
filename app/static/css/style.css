@@ -65,9 +65,19 @@ body {
 		 background-color: #d84a38;
 }
 .app-label{
-	padding: 20px;
 	text-align: center;
+	margin-top: 10px;
 }
+.app-label .app-desc{
+	font-size: 14px;
+}
+.video-wrapper ,canvas {
+	margin-top: 10px;
+}
+
 .image-capture-button {
-	margin-top: 40px;
+	margin-top: 30px;
+}
+.hashtags{
+	    margin-top: 1px;
 }
