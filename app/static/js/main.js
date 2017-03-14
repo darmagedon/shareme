@@ -50,30 +50,16 @@ function imageChanged() {
   var reader  = new FileReader();
   reader.addEventListener("load", function () {
     preview.src = reader.result;
-      var exif = EXIF.readFromBinaryFile(new BinaryFile(reader.result));
-    $('textarea').val(exif);
-    switch(exif.Orientation){
-      case 8:
-        context.rotate(90*Math.PI/180);
-        break;
-      case 3:
-         context.rotate(180*Math.PI/180);
-         break;
-      case 6:
-        context.rotate(-90*Math.PI/180);
-        break;
-    }
   }, false);
-  console.log(exif);
   if (file) {
     reader.readAsDataURL(file);
-
     setTimeout(function() {
       canvas.className = 'none';
       var context = canvas.getContext('2d');
 
       var image = new Image();
       image.onload = function() {
+        console.log(image.exif);
           context.drawImage(image, 0, 0, canvas.width, canvas.height);
           // putImageOverlayOn(context);
       }
