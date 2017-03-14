@@ -113,14 +113,6 @@ sharemei.photoFunctions = sharemei.photoFunctions || {};
 					photoFunction.getImageFromFile();
 					photoFunction.stopStream();
      });
-		 $(document).on('click', '#capture-another', function(){
-				photoFunction.prepareDocument();
-				console.log('cliked');
-				$("textarea").val(defaultTags);
-				$('.share-response-success, .share-response-fail').addClass('hide');
-				if (!isMobile)
-					photoFunction.startStream();
-			});
 			// $(document).on('click', '#snapshot', function(){
 			// 	canvas.className = 'none';
 			//   var context = canvas.getContext('2d');
