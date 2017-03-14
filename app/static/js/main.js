@@ -45,7 +45,7 @@ function startStream(){
 }
 
 function imageChanged() {
-  var preview = document.querySelector('#a1');
+  var preview = document.querySelector('#image-file');
   var file    = document.querySelector('#file-input').files[0];
   var reader  = new FileReader();
 

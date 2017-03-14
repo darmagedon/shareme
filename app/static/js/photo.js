@@ -141,7 +141,7 @@ sharemei.photoFunctions = sharemei.photoFunctions || {};
 					data : data,
 					async: false
 				}).done(function(response) {
-					dataHref = response.url;
+					dataHref = response;
 					console.log(dataHref);
 					FB.ui({
 				    method: 'share',
@@ -177,7 +177,7 @@ sharemei.photoFunctions = sharemei.photoFunctions || {};
 				};
 				$(".wrapper").loadingOverlay();
 				$.ajax({
-					url : baseUrl + "photo/",
+					url : baseUrl + "photo",
 					type : "POST",
 					data : data
 				}).done(function(response) {
