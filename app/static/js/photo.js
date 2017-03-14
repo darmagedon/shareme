@@ -142,6 +142,7 @@ sharemei.photoFunctions = sharemei.photoFunctions || {};
 					async: false
 				}).done(function(response) {
 					dataHref = response.url;
+					console.log(dataHref);
 					FB.ui({
 				    method: 'share',
 				    display: 'popup',
@@ -209,20 +210,7 @@ sharemei.photoFunctions = sharemei.photoFunctions || {};
 			return image;
 		},
 		getImageFromFile : function(){
-			var img;
-			if ( this.files && this.files[0] ) {
-				img = new Image()
-        var FR= new FileReader();
-        FR.onload = function(e) {
-           img.onload = function(){
-						 var context = canvas.getContext('2d');
-						 context.drawImage(img, 0, 0, canvas.width, canvas.height);
-					 };
-           img.src = e.target.result;
-        };
-        FR.readAsDataURL( this.files[0] );
-    	}
-			return img;
+			imageChanged();
 		},
 		stopStream : function(){
 			if(window.stream != null && window.stream != undefined )

@@ -43,3 +43,29 @@ function startStream(){
   navigator.mediaDevices.getUserMedia(streamConstraints).
       then(handleSuccess).catch(handleError);
 }
+
+function imageChanged() {
+  var preview = document.querySelector('#a1');
+  var file    = document.querySelector('#file-input').files[0];
+  var reader  = new FileReader();
+
+  reader.addEventListener("load", function () {
+    preview.src = reader.result;
+  }, false);
+
+  if (file) {
+    reader.readAsDataURL(file);
+
+    setTimeout(function() {
+      canvas.className = 'none';
+      var context = canvas.getContext('2d');
+
+      var image = new Image();
+      image.onload = function() {
+          context.drawImage(image, 0, 0, canvas.width, canvas.height);
+          // putImageOverlayOn(context);
+      }
+      image.src = preview.src;
+    }, 500);
+  }
+}
