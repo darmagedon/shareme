@@ -6,7 +6,7 @@ import os
 import base64
 app = Flask(__name__)
 version='2.2'
-base_url = 'http://10.10.9.243:5000/'
+base_url = 'https://shareme.lftechnology.com/'
 
 
 def save_image(image_content, time_stamp, image_location):
