@@ -42,7 +42,7 @@ def post_page():
     access_token = attributes['accessToken']
     time_stamp = int(time.time())
     access_token = attributes['accessToken']
-    image_content = attributes['image']
+    image_content = attributes['image'].split(',')[1]
     tags = attributes['tags']
     image_location = os.getcwd()+'/static/image/image'+str(time_stamp)+'.png'
     print time_stamp, tags
