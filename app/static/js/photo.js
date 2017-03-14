@@ -162,9 +162,6 @@ sharemei.photoFunctions = sharemei.photoFunctions || {};
 				FB.getLoginStatus(function(response) {
 					if (response.status === 'connected') {
 							photoFunction.publishToFacebook();
-			    } else if (response.status === 'not_authorized') {
-							console.log("permission not granted.. hence can't publish to facebook.");
-							alert("permission not granted to shareme for publising to facebook");
 			    } else {
 						console.log("logged out");
 						FB.login(function(response) {
