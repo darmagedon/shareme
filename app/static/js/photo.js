@@ -179,6 +179,7 @@ sharemei.photoFunctions = sharemei.photoFunctions || {};
 								type : "POST",
 								data : data
 							}).done(function(response) {
+								$(".wrapper").loadingOverlay("remove");
 								if (typeof successCallBack === "function")
 									successCallBack(response);
 							}).fail(function(error) {
