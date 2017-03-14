@@ -48,8 +48,8 @@ def post_page():
     return render_template('success.html')
 
 @app.route('/preview/<int:id>', methods=['GET'])
-def photo_preview_Page():
-    return render_template('ImagePreview.html')
+def photo_preview_Page(id):
+    return render_template('ImagePreview.html', source = str(id) + '.png')
 
 if __name__ == '__main__':
 

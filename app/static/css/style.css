@@ -40,9 +40,6 @@ body {
 	height:auto;
 	overflow:auto;
 }
-.photo-container .score-overlay {
-
-}
 
 .tag-container{
 	margin-top: 20px;
@@ -57,4 +54,13 @@ body {
 	margin-top: 20px;
 	padding: 20px;
 	text-align: center;
+}
+.btn button{
+   background-color: #4267b2;
+}
+.btn button:hover{
+   background-color: #365899;
+}
+.btn button#capture-another{
+		 background-color: #d84a38;
 }
