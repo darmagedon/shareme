@@ -158,7 +158,6 @@ sharemei.photoFunctions = sharemei.photoFunctions || {};
 			});
 			$(document).on('click', '.btn-share-instagram', function(e) {
 				e.preventDefault();
-				var accessToken = $("#access-token").val();
 				console.log(accessToken);
 				FB.getLoginStatus(function(response) {
 					if (response.status === 'connected') {
@@ -189,6 +188,7 @@ sharemei.photoFunctions = sharemei.photoFunctions || {};
 			});
 		},
 		publishToFacebook : function(){
+			var accessToken = $("#access-token").val();
 			var image = photoFunction.getImageThroughCanvas();
 			var tags = $('textarea[name="tags"]').val();
 			var data = {
