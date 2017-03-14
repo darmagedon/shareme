@@ -6,14 +6,14 @@ import os
 import base64
 app = Flask(__name__)
 version='2.2'
-base_url = 'http://10.10.9.243/'
+base_url = 'http://10.10.9.243:5000/'
 
 
 def save_image(image_content, time_stamp, image_location):
     print('1')
-    image_file = open(image_location, 'w')
+    image_file = open(image_location, 'wb')
     print(image_content)
-    image_file.write(base64.decodestring(image_content))
+    image_file.write(image_content.decode('base64'))
     print "done saved"
 
 def post_image(access_token, version, image_location, tags):
@@ -32,7 +32,7 @@ def get_sharable_link():
     time_stamp = int(time.time())
     link = base_url + 'preview/'+str(time_stamp)
     image_location = os.getcwd()+'/static/image/image'+str(time_stamp)+'.png'
-    image_content = request.form['image']
+    image_content = request.form['image'].split(',')[1]
     save_image(image_content,time_stamp,image_location)
     return link
 
@@ -52,7 +52,7 @@ def post_page():
 
 @app.route('/preview/<int:id>', methods=['GET'])
 def photo_preview_Page(id):
-    return render_template('imagePreview.html', source = str(id) + '.png')
+    return render_template('imagePreview.html', source = 'image' + str(id) + '.png')
 
 if __name__ == '__main__':
 
