@@ -42,8 +42,8 @@ body {
 }
 
 .tag-container{
-	margin-top: 20px;
-	padding: 20px;
+	margin-top: 10px;
+	padding: 10px;
 }
 
 .btn {
@@ -80,4 +80,15 @@ body {
 }
 .hashtags{
 	    margin-top: 1px;
+}
+.share-response-success, .share-response-fail {
+	text-align: center;
+	padding:5px;
+	margin-top: 10px;
+}
+.share-response-success {
+	color :#365899;
+}
+.share-response-fail {
+	color : #d84a38;
 }

@@ -4,7 +4,7 @@ sharemei.photoFunctions = sharemei.photoFunctions || {};
 (function(photoFunction) {
 	var baseUrl = location.protocol + "//" + location.host + "/";
 	var video = document.getElementById('video');
-	var defaultTags = "#UnlimitedBaseball #contest #WorldSeries";
+	var defaultTags = "Wow!!! What a game! What is more intense than a nail biter?!?\n\n #UnlimitedBaseball #contest #WorldSeries";
 
 	function statusChangeCallback(response) {
 	    console.log('statusChangeCallback');
@@ -117,6 +117,7 @@ sharemei.photoFunctions = sharemei.photoFunctions || {};
 				photoFunction.prepareDocument();
 				console.log('cliked');
 				$("textarea").val(defaultTags);
+				$('.share-response-success, .share-response-fail').addClass('hide');
 				if (!isMobile)
 					photoFunction.startStream();
 			});
@@ -202,9 +203,11 @@ sharemei.photoFunctions = sharemei.photoFunctions || {};
 				data : data
 			}).done(function(response) {
 				$(".wrapper").loadingOverlay("remove");
+				$('.share-response-success ').removeClass('hide');
 				if (typeof successCallBack === "function")
 					successCallBack(response);
 			}).fail(function(error) {
+				$('.share-response-fail').removeClass('hide');
 				$(".wrapper").loadingOverlay("remove");
 				if (typeof errorCallBack === "function")
 					errorCallBack(error);
