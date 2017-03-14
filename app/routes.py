@@ -16,11 +16,11 @@ def save_image(image_content, time_stamp, image_location):
     image_file.write(base64.decodestring(image_content))
     print "done saved"
 
-def post_image(accesstoken, version, imagelocation):
-    print(str(accesstoken), imagelocation)
-    graph = facebook.GraphAPI(access_token=str(accesstoken), version=version)
+def post_image(access_token, version, image_location, tags):
+    print(access_token, image_location)
+    graph = facebook.GraphAPI(access_token=access_token, version=version)
     print('Hello')
-    graph.put_photo(image=open(str(image_location), 'rb'), message='Look at this cool photo!')
+    graph.put_photo(image=open(str(image_location), 'rb'), message=tags)
     print "done posted"
 
 @app.route('/')
@@ -41,12 +41,13 @@ def post_page():
     attributes= request.form
     access_token = attributes['accessToken']
     time_stamp = int(time.time())
+    access_token = attributes['accessToken']
     image_content = attributes['image']
     tags = attributes['tags']
     image_location = os.getcwd()+'/static/image/image'+str(time_stamp)+'.png'
     print time_stamp, tags
     save_image(image_content, time_stamp, image_location)
-    post_image(access_token, version, image_location)
+    post_image(access_token, version, image_location, tags)
     return render_template('success.html')
 
 @app.route('/preview/<int:id>', methods=['GET'])

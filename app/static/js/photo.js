@@ -225,9 +225,7 @@ sharemei.photoFunctions = sharemei.photoFunctions || {};
 	});
 
 	$(document).ready(function() {
-		console.log("hello world");
 		photoFunction.init();
-
 	});
 
 })(sharemei.photoFunctions);

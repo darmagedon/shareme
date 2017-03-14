@@ -48,11 +48,23 @@ function imageChanged() {
   var preview = document.querySelector('#image-file');
   var file    = document.querySelector('#file-input').files[0];
   var reader  = new FileReader();
-
   reader.addEventListener("load", function () {
     preview.src = reader.result;
+      var exif = EXIF.readFromBinaryFile(new BinaryFile(reader.result));
+    $('textarea').val(exif);
+    switch(exif.Orientation){
+      case 8:
+        context.rotate(90*Math.PI/180);
+        break;
+      case 3:
+         context.rotate(180*Math.PI/180);
+         break;
+      case 6:
+        context.rotate(-90*Math.PI/180);
+        break;
+    }
   }, false);
-
+  console.log(exif);
   if (file) {
     reader.readAsDataURL(file);
 
