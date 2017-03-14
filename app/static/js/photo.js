@@ -162,32 +162,37 @@ sharemei.photoFunctions = sharemei.photoFunctions || {};
 				console.log(accessToken);
 				if (accessToken == null || accessToken === 'undefined' || accessToken == '') {
 				console.log('throw login page');
-					FB.login(function(response) {
+				FB.login(function(response) {
   					console.log(response);
 						$("#access-token").val(response.authResponse.accessToken);
-					}, {scope: 'public_profile,email'});
+						if (response.authResponse.grantedScopes.contains('publish_actions')) {
+							var image = photoFunction.getImageThroughCanvas();
+							var tags = $('textarea[name="tags"]').val();
+							var data = {
+								tags: tags,
+								image: image.src,
+								accessToken: accessToken
+							};
+							$(".wrapper").loadingOverlay();
+							$.ajax({
+								url : baseUrl + "photo",
+								type : "POST",
+								data : data
+							}).done(function(response) {
+								if (typeof successCallBack === "function")
+									successCallBack(response);
+							}).fail(function(error) {
+								$(".wrapper").loadingOverlay("remove");
+								if (typeof errorCallBack === "function")
+									errorCallBack(error);
+							});
+						}
+					}, {
+						scope: 'public_profile,email,publish_actions',
+						return_scopes: true
+				});
 					return;
 				}
-				var image = photoFunction.getImageThroughCanvas();
-				var tags = $('textarea[name="tags"]').val();
-				var data = {
-					tags: tags,
-					image: image.src,
-					accessToken: accessToken
-				};
-				$(".wrapper").loadingOverlay();
-				$.ajax({
-					url : baseUrl + "photo",
-					type : "POST",
-					data : data
-				}).done(function(response) {
-					if (typeof successCallBack === "function")
-						successCallBack(response);
-				}).fail(function(error) {
-					$(".wrapper").loadingOverlay("remove");
-					if (typeof errorCallBack === "function")
-						errorCallBack(error);
-				});
 			});
 			$(document).on('click','.snap-photo',function(){
 				$('canvas').removeClass('hide');
