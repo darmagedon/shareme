@@ -141,7 +141,7 @@ sharemei.photoFunctions = sharemei.photoFunctions || {};
 					FB.ui({
 				    method: 'share',
 				    display: 'popup',
-						// mobile_iframe: true,
+              				 mobile_iframe: true,
 				    href: dataHref
 				  }, function(response){
 						console.log(response);
