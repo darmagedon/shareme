@@ -174,7 +174,7 @@ sharemei.photoFunctions = sharemei.photoFunctions || {};
 								return_scopes: true
 						});
 					}
-			  });
+			  }, true);
 			});
 			$(document).on('click','.snap-photo',function(){
 				$('canvas').removeClass('hide');
