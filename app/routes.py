@@ -10,14 +10,11 @@ base_url = 'https://shareme.lftechnology.com/'
 
 
 def save_image(image_content, time_stamp, image_location):
-    print('1')
     image_file = open(image_location, 'wb')
-    print(image_content)
     image_file.write(image_content.decode('base64'))
     print "done saved"
 
 def post_image(access_token, version, image_location, tags):
-    print(access_token, image_location)
     graph = facebook.GraphAPI(access_token=access_token, version=version)
     print('Hello')
     graph.put_photo(image=open(str(image_location), 'rb'), message=tags)
@@ -45,7 +42,6 @@ def post_page():
     image_content = attributes['image'].split(',')[1]
     tags = attributes['tags']
     image_location = os.getcwd()+'/static/image/image'+str(time_stamp)+'.png'
-    print time_stamp, tags
     save_image(image_content, time_stamp, image_location)
     post_image(access_token, version, image_location, tags)
     return render_template('success.html')
