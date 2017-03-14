@@ -64,3 +64,10 @@ body {
 .btn button#capture-another{
 		 background-color: #d84a38;
 }
+.app-label{
+	padding: 20px;
+	text-align: center;
+}
+.image-capture-button {
+	margin-top: 40px;
+}
